@@ -4,9 +4,6 @@
 		<Cobay_AssignRelatedProducts>
 			<active>true</active>
 			<codePool>local</codePool>
-			<depends>
-				<Cobay_Common />
-			</depends>
 		</Cobay_AssignRelatedProducts>
 	</modules>
 </config>
