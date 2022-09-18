@@ -1,0 +1,14 @@
+{
+  "name": "hgati/assign_related_products",
+  "type": "magento-module",
+  "description": "스케줄러를 통하여 자동으로 관련상품을 추가합니다.",
+  "keywords": ["magento related products"],
+  "homepage": "https://github.com/hgati/assign_related_products",
+  "license": "MIT",
+  "authors": [{ "name": "Dennis Lee", "email": "cobays@gmail.com", "homepage": "https://github.com/hgati", "role": "Magento 1.x Developer" }],
+
+  "require": {
+    "php": ">=7.2.0",
+    "magento-hackathon/magento-composer-installer": "*"
+  }
+}

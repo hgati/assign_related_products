@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Cobay_AssignRelatedProducts>
+			<version>0.1.0</version>
+		</Cobay_AssignRelatedProducts>
+	</modules>
+
+	<global>
+    	<helpers>
+    		<assignrelatedproducts>
+    			<class>Cobay_AssignRelatedProducts_Helper</class>
+    		</assignrelatedproducts>
+    	</helpers>
+   	   	<models>
+			<assignrelatedproducts>
+				<class>Cobay_AssignRelatedProducts_Model</class>
+			</assignrelatedproducts>
+		</models>
+	</global>
+
+    <crontab>
+		<jobs>
+			<Cobay_AssignRelatedProducts>
+				<schedule><cron_expr>45 1 * * *</cron_expr></schedule>
+				<run><model>assignrelatedproducts/observer::assign</model></run>
+			</Cobay_AssignRelatedProducts>
+		</jobs>
+	</crontab>
+	
+	<default>
+		<catalog>
+			<assignrelatedproducts>
+				<enable>0</enable>
+				<max_related>5</max_related>
+				<max_upsell>4</max_upsell>
+				<max_cross_sell>3</max_cross_sell>
+			</assignrelatedproducts>
+		</catalog>
+	</default>
+</config>

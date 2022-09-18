@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Cobay_AssignRelatedProducts>
+			<active>true</active>
+			<codePool>local</codePool>
+			<depends>
+				<Cobay_Common />
+			</depends>
+		</Cobay_AssignRelatedProducts>
+	</modules>
+</config>
