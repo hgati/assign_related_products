@@ -8,11 +8,11 @@ class Cobay_AssignRelatedProducts_Model_Observer {
 				$stores = $group->getStores();
 				foreach ($stores as $store){
 					$enable = (int)Mage::getStoreConfig('catalog/assignrelatedproducts/enable', $store->getId());
-					if(!$enable) break;
+					if (!$enable) break;
 					
 					$ids = Mage::getModel("catalog/product")->getCollection()
 					->addStoreFilter($store->getId())
-					->addAttributeToFilter('status', 1)			//enabled
+					->addAttributeToFilter('status', 1)		//enabled
 					->addAttributeToFilter('visibility', 4)	//catalog, search
 					->getAllIds();
 
@@ -21,7 +21,7 @@ class Cobay_AssignRelatedProducts_Model_Observer {
 						$category_ids = $product->getCategoryIds();
 						$_category = Mage::getSingleton('catalog/category')->load(end($category_ids));
 						
-						/* related product */
+						/*** Related ***/
 						$number = Mage::getStoreConfig('catalog/assignrelatedproducts/max_related', $store->getId());
 						$collection = Mage::getModel('catalog/product')->getCollection()
 						->addStoreFilter($store->getId())
@@ -36,8 +36,9 @@ class Cobay_AssignRelatedProducts_Model_Observer {
 							$order++; 
 						}
 						$product->setRelatedLinkData($assoc_array);
+						Mage::log('Related: ' . $product->getName() . ': ' . implode(', ', array_keys($assoc_array)));
 
-						/* upsell products */
+						/*** Upsell ***/
 						$number = Mage::getStoreConfig('catalog/assignrelatedproducts/max_upsell', $store->getId());
 						$collection = Mage::getModel('catalog/product')->getCollection()
 						->addStoreFilter($store->getId())
@@ -53,8 +54,9 @@ class Cobay_AssignRelatedProducts_Model_Observer {
 							$order++;
 						}
 						$product->setUpSellLinkData($assoc_array);
+						Mage::log('Up Sell: ' . $product->getName() . ': ' . implode(', ', array_keys($assoc_array)));
 						
-						/* crossell products */
+						/*** Crossell ***/
 						$number = Mage::getStoreConfig('catalog/assignrelatedproducts/max_cross_sell', $store->getId());
 						$collection = Mage::getModel('catalog/product')->getCollection()
 						->addStoreFilter($store->getId())
@@ -69,6 +71,8 @@ class Cobay_AssignRelatedProducts_Model_Observer {
 							$order++;
 						}
 						$product->setCrossSellLinkData($assoc_array);
+						Mage::log('Cross Sell: ' . $product->getName() . ': ' . implode(', ', array_keys($assoc_array)));
+
 						$product->save();
 						unset($product);
 					}
